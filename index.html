@@ -4,17 +4,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>三原市営住宅 家賃かんたん計算</title>
-<meta name="description" content="三原市営住宅の収入基準を簡単に確認できるシミュレーターです。">
+
+<title>三原市営住宅 家賃シミュレーター</title>
+
+<meta name="description" content="広島県三原市の市営住宅の家賃目安を確認できるシミュレーターです。">
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
-  background: #f5f7f6;
-  color: #333;
   font-family: sans-serif;
+  color: #333;
+  background: #f5f7f6;
   line-height: 1.7;
 }
 
@@ -22,10 +26,18 @@ header {
   background: #26775d;
   color: white;
   text-align: center;
-  padding: 25px 12px;
+  padding: 28px 12px;
 }
 
-header h1 { font-size: 22px; margin: 0; }
+header h1 {
+  font-size: 22px;
+  margin: 0;
+}
+
+header p {
+  font-size: 13px;
+  margin-bottom: 0;
+}
 
 main {
   max-width: 650px;
@@ -38,20 +50,25 @@ main {
   padding: 22px;
   margin-bottom: 20px;
   border-radius: 12px;
-  box-shadow: 0 2px 10px #00000008;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-h2 { color: #26775d; font-size: 19px; }
+h2 {
+  color: #26775d;
+  font-size: 19px;
+  margin-top: 0;
+}
 
 label {
   display: block;
   font-weight: bold;
-  margin: 16px 0 5px;
+  margin: 18px 0 6px;
 }
 
-input, select {
+select,
+input {
   width: 100%;
-  padding: 12px;
+  padding: 13px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 7px;
@@ -71,28 +88,55 @@ button {
   cursor: pointer;
 }
 
-.result {
-  display: none;
-  background: #edf7f1;
-  padding: 18px;
-  margin-top: 20px;
-  border-radius: 8px;
+button:hover {
+  background: #1d604b;
 }
 
-.result-number {
-  font-size: 27px;
-  font-weight: bold;
+.result {
+  display: none;
+  margin-top: 22px;
+  padding: 18px;
+  background: #edf7f1;
+  border-radius: 9px;
+}
+
+.result h3 {
   color: #26775d;
 }
 
+.rent {
+  font-size: 27px;
+  font-weight: bold;
+  color: #26775d;
+  margin: 10px 0;
+}
+
 .notice {
-  font-size: 12px;
   color: #666;
+  font-size: 12px;
+}
+
+.info {
+  background: #f5f7f6;
+  padding: 13px;
+  border-radius: 7px;
+  font-size: 14px;
+}
+
+.warning {
+  background: #fff6e8;
+  padding: 13px;
+  border-radius: 7px;
+  font-size: 13px;
+}
+
+a {
+  color: #26775d;
 }
 
 footer {
   text-align: center;
-  padding: 25px;
+  padding: 25px 10px;
   color: #777;
   font-size: 12px;
 }
@@ -102,217 +146,301 @@ footer {
 <body>
 
 <header>
-  <h1>三原市営住宅 家賃かんたん計算</h1>
-  <p>広島県三原市の市営住宅情報</p>
+  <h1>三原市営住宅<br>家賃シミュレーター</h1>
+  <p>広島県三原市・皆実上住宅</p>
 </header>
 
 <main>
 
 <section class="card">
-  <h2>収入基準シミュレーター</h2>
+
+  <h2>家賃を計算する</h2>
 
   <p>
-    世帯の年間所得と家族構成を入力すると、
-    月額所得と収入基準を確認できます。
+    世帯の政令月収と希望する間取りを入力すると、
+    参考家賃を確認できます。
   </p>
 
-  <label for="housing">住宅の種類</label>
+  <label for="housing">
+    住宅名
+  </label>
+
   <select id="housing">
-    <option value="public">公営住宅</option>
-    <option value="improved">改良住宅</option>
+    <option value="manami">
+      【Ｆ】皆実上住宅
+    </option>
   </select>
 
-  <label for="level">世帯区分</label>
-  <select id="level">
-    <option value="general">一般世帯</option>
-    <option value="discretionary">裁量階層</option>
-  </select>
+  <label for="layout">
+    間取り
+  </label>
 
-  <label for="family">世帯人数（申込者を含む）</label>
-  <select id="family">
-    <option value="1">1人</option>
-    <option value="2">2人</option>
-    <option value="3">3人</option>
-    <option value="4">4人</option>
-    <option value="5">5人</option>
-    <option value="6">6人</option>
+  <select id="layout">
+    <option value="2DK">2DK</option>
+    <option value="3DK" selected>3DK</option>
+    <option value="3LDK">3LDK</option>
   </select>
 
   <label for="income">
-    世帯全員の年間所得合計（円）
+    世帯の政令月収（円）
   </label>
+
   <input
     type="number"
     id="income"
     min="0"
-    placeholder="例：2020000"
+    placeholder="例：96667"
   >
 
   <p class="notice">
-    ※給与収入・年金収入そのものではありません。
-    給与所得控除などを差し引いた後の所得金額を入力してください。
+    ※政令月収とは、給与収入などの額面年収ではありません。
+    所得や各種控除を反映した後の月額です。
   </p>
 
-  <label for="earners">
-    給与所得・公的年金所得がある人数
-  </label>
-  <select id="earners">
-    <option value="0">0人</option>
-    <option value="1">1人</option>
-    <option value="2">2人</option>
-    <option value="3">3人</option>
-    <option value="4">4人</option>
-  </select>
-
-  <button onclick="calculate()">
-    月額所得を計算する
+  <button onclick="calculateRent()">
+    家賃を計算する
   </button>
 
   <div id="result" class="result"></div>
+
 </section>
 
 <section class="card">
-  <h2>計算方法について</h2>
+
+  <h2>皆実上住宅について</h2>
 
   <p>
-    三原市の収入基準は、年間所得から各種控除を
-    差し引き、12か月で割って算出します。
+    皆実上住宅は、広島県三原市皆実六丁目にある
+    市営住宅です。
   </p>
 
-  <p>
-    同居控除：1人につき380,000円
-  </p>
+  <div class="info">
+    <p>住宅名：皆実上住宅</p>
+    <p>住所：三原市皆実六丁目14番</p>
+    <p>住宅種別：公営住宅</p>
+  </div>
 
-  <p>
-    給与・年金所得者の控除：1人につき100,000円
-  </p>
-
-  <p class="notice">
-    この試作版では、個別の特別控除、障害者控除、
-    ひとり親控除などはまだ計算していません。
-  </p>
 </section>
 
 <section class="card">
-  <h2>公式情報</h2>
+
+  <h2>家賃データについて</h2>
+
   <p>
-    <a href="https://www.city.mihara.hiroshima.jp/soshiki/54/shuunyuukijun.html"
-       target="_blank" rel="noopener">
-      三原市：市営住宅収入基準について
+    このシミュレーターでは、三原市営住宅管理グループが
+    公開した令和8年度第2回定期（再）募集一覧を
+    参考資料として使用しています。
+  </p>
+
+  <p>
+    3DKについては募集住戸ごとの家賃を登録しています。
+  </p>
+
+  <p>
+    2DK・3LDKについては、今回の資料で
+    収入区分別の家賃を確認できていないため、
+    現在は計算対象外です。
+  </p>
+
+  <p>
+    <a
+      href="https://www.shieijyutaku-mihara.jp/wp/wp-content/uploads/2026/11/reiwa8_2kai_teikisai.pdf"
+      target="_blank"
+      rel="noopener"
+    >
+      令和8年度第2回募集一覧表（PDF）
     </a>
   </p>
-  <p>
-    <a href="https://www.city.mihara.hiroshima.jp/soshiki/54/juutakudantiitiran.html"
-       target="_blank" rel="noopener">
-      三原市：市営住宅団地一覧
-    </a>
-  </p>
+
 </section>
 
 <section class="card">
+
   <h2>ご利用上の注意</h2>
+
   <p class="notice">
-    このサイトは収入基準の目安を確認するための
-    試作シミュレーターです。
-    実際の入居資格や家賃を保証するものではありません。
-    正確な判定は三原市の公式窓口にご確認ください。
+    このサイトは家賃の目安を確認するための
+    非公式シミュレーターです。
+    掲載金額は募集時点の参考家賃であり、
+    現在の空室状況や全住戸の家賃を保証するものではありません。
+    実際の家賃は住宅ごとに異なる場合があります。
+    正確な情報は三原市営住宅管理グループへ
+    お問い合わせください。
   </p>
+
 </section>
 
 </main>
 
 <footer>
-  © 三原市営住宅 家賃かんたん計算
+  © 三原市営住宅 家賃シミュレーター
   <p>三原市公式サイトとは関係のない非公式サイトです。</p>
 </footer>
 
 <script>
-function calculate() {
 
-  const housing = document.getElementById("housing").value;
-  const level = document.getElementById("level").value;
+// 令和8年度第2回募集資料の3DK家賃データ
+// 住戸別の家賃を範囲として表示する
 
-  const family = Number(document.getElementById("family").value);
-  const income = Number(document.getElementById("income").value);
-  const earners = Number(document.getElementById("earners").value);
+const rentData = {
+  "3DK": [
+    {
+      limit: 104000,
+      min: 19900,
+      max: 20200
+    },
+    {
+      limit: 123000,
+      min: 23000,
+      max: 23300
+    },
+    {
+      limit: 139000,
+      min: 26300,
+      max: 26600
+    },
+    {
+      limit: 158000,
+      min: 29700,
+      max: 30100
+    },
+    {
+      limit: 186000,
+      min: 33900,
+      max: 34400
+    },
+    {
+      limit: 214000,
+      min: 39100,
+      max: 39600
+    }
+  ]
+};
+
+function calculateRent() {
+
+  const layout =
+    document.getElementById("layout").value;
+
+  const incomeValue =
+    document.getElementById("income").value;
+
+  const result =
+    document.getElementById("result");
 
   if (
-    document.getElementById("income").value === "" ||
-    !Number.isFinite(income) ||
-    income < 0
+    incomeValue === "" ||
+    !Number.isFinite(Number(incomeValue)) ||
+    Number(incomeValue) < 0
   ) {
-    alert("年間所得合計を正しく入力してください。");
+    alert("政令月収を正しく入力してください。");
     return;
   }
 
-  // 同居控除
-  const familyDeduction = (family - 1) * 380000;
-
-  // 給与・年金所得者の控除
-  const earnerDeduction = earners * 100000;
-
-  // 今回の試作版で計算する控除合計
-  const deduction = familyDeduction + earnerDeduction;
-
-  // 月額所得
-  const monthlyIncome = Math.max(
-    0,
-    income - deduction
-  ) / 12;
-
-  // 三原市公式の収入基準
-  let limit;
-
-  if (housing === "public") {
-    limit = level === "general" ? 158000 : 214000;
-  } else {
-    limit = level === "general" ? 114000 : 139000;
-  }
-
-  const eligible = monthlyIncome <= limit;
-
-  const result = document.getElementById("result");
+  const income = Number(incomeValue);
 
   result.style.display = "block";
 
+  // 今回の募集資料に家賃データがない間取り
+  if (!rentData[layout]) {
+
+    result.innerHTML = `
+      <h3>家賃データを確認中です</h3>
+
+      <p>住宅：皆実上住宅</p>
+      <p>間取り：${layout}</p>
+
+      <div class="warning">
+        今回の公式募集資料では、
+        ${layout}の収入区分別家賃を確認できませんでした。
+        現時点では家賃を表示できません。
+      </div>
+
+      <p class="notice">
+        データが確認でき次第、計算機能を追加します。
+      </p>
+    `;
+
+    result.scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
+  // 該当する収入区分を検索
+  const rent = rentData[layout].find(
+    item => income <= item.limit
+  );
+
+  if (!rent) {
+
+    result.innerHTML = `
+      <h3>該当する家賃データがありません</h3>
+
+      <p>
+        入力された政令月収は
+        ${income.toLocaleString()}円です。
+      </p>
+
+      <p>
+        今回の募集資料に掲載された
+        家賃区分の上限を超えています。
+      </p>
+
+      <p class="notice">
+        実際の家賃については管理グループへ
+        ご確認ください。
+      </p>
+    `;
+
+    result.scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
+  const minRent = rent.min.toLocaleString();
+  const maxRent = rent.max.toLocaleString();
+
   result.innerHTML = `
-    <h2>計算結果</h2>
+    <h3>家賃の計算結果</h3>
 
-    <p>年間所得合計</p>
-    <p>${income.toLocaleString()}円</p>
+    <p>住宅名：皆実上住宅</p>
 
-    <p>同居控除</p>
-    <p>-${familyDeduction.toLocaleString()}円</p>
+    <p>間取り：${layout}</p>
 
-    <p>給与・年金所得者控除</p>
-    <p>-${earnerDeduction.toLocaleString()}円</p>
+    <p>
+      政令月収：
+      ${income.toLocaleString()}円
+    </p>
 
     <hr>
 
-    <p>推定月額所得</p>
-    <div class="result-number">
-      ${Math.round(monthlyIncome).toLocaleString()}円
+    <p>参考月額家賃</p>
+
+    <div class="rent">
+      ${minRent}円 ～ ${maxRent}円
     </div>
 
-    <p>収入基準：${limit.toLocaleString()}円以下</p>
+    <p class="notice">
+      今回の募集資料に掲載された3DKの住戸別家賃の範囲です。
+      実際の家賃は入居する住宅によって異なります。
+    </p>
 
     <hr>
 
-    <h3>
-      ${eligible
-        ? "収入基準を満たす可能性があります"
-        : "収入基準を超えています"}
-    </h3>
-
-    <p class="notice">
-      ※個別の特別控除等を含まない試算です。
-      実際の判定とは異なる場合があります。
+    <p>
+      該当収入区分：
+      ${rent.limit.toLocaleString()}円以下
     </p>
+
+    <div class="warning">
+      この金額は令和8年度第2回募集時点の参考情報です。
+      現在の家賃や空室を保証するものではありません。
+    </div>
   `;
 
   result.scrollIntoView({ behavior: "smooth" });
 }
+
 </script>
 
 </body>
 </html>
+
