@@ -2,117 +2,101 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="広島県三原市の市営住宅の家賃や収入基準を確認するためのシミュレーターです。">
-  <title>三原市営住宅 家賃かんたん計算</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三原市営住宅 家賃かんたん計算</title>
+<meta name="description" content="三原市営住宅の収入基準を簡単に確認できるシミュレーターです。">
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      font-family: sans-serif;
-      background: #f5f7f6;
-      color: #333;
-      line-height: 1.7;
-    }
+body {
+  margin: 0;
+  background: #f5f7f6;
+  color: #333;
+  font-family: sans-serif;
+  line-height: 1.7;
+}
 
-    header {
-      background: #26775d;
-      color: white;
-      padding: 25px 15px;
-      text-align: center;
-    }
+header {
+  background: #26775d;
+  color: white;
+  text-align: center;
+  padding: 25px 12px;
+}
 
-    header h1 {
-      font-size: 23px;
-      margin: 0;
-    }
+header h1 { font-size: 22px; margin: 0; }
 
-    header p {
-      font-size: 13px;
-      margin: 5px 0 0;
-    }
+main {
+  max-width: 650px;
+  margin: 25px auto;
+  padding: 0 15px;
+}
 
-    main {
-      max-width: 650px;
-      margin: 25px auto;
-      padding: 0 15px;
-    }
+.card {
+  background: white;
+  padding: 22px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px #00000008;
+}
 
-    .card {
-      background: white;
-      padding: 22px;
-      margin-bottom: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
+h2 { color: #26775d; font-size: 19px; }
 
-    h2 {
-      font-size: 19px;
-      color: #26775d;
-      margin-top: 0;
-    }
+label {
+  display: block;
+  font-weight: bold;
+  margin: 16px 0 5px;
+}
 
-    label {
-      display: block;
-      font-weight: bold;
-      margin: 15px 0 5px;
-    }
+input, select {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  background: white;
+}
 
-    input, select {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 7px;
-      background: white;
-    }
+button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 22px;
+  border: none;
+  border-radius: 8px;
+  background: #26775d;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    button {
-      width: 100%;
-      padding: 15px;
-      margin-top: 22px;
-      border: none;
-      border-radius: 8px;
-      background: #26775d;
-      color: white;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.result {
+  display: none;
+  background: #edf7f1;
+  padding: 18px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
 
-    button:hover {
-      background: #1d604b;
-    }
+.result-number {
+  font-size: 27px;
+  font-weight: bold;
+  color: #26775d;
+}
 
-    #result {
-      display: none;
-      margin-top: 20px;
-      padding: 15px;
-      background: #edf7f1;
-      border-radius: 8px;
-    }
+.notice {
+  font-size: 12px;
+  color: #666;
+}
 
-    .notice {
-      font-size: 13px;
-      color: #666;
-    }
-
-    .official-link a {
-      color: #26775d;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px 10px;
-      font-size: 12px;
-      color: #777;
-    }
-  </style>
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #777;
+  font-size: 12px;
+}
+</style>
 </head>
 
 <body>
@@ -124,135 +108,210 @@
 
 <main>
 
-  <section class="card">
-    <h2>家賃シミュレーター</h2>
+<section class="card">
+  <h2>収入基準シミュレーター</h2>
 
-    <p>
-      世帯の人数や収入などを入力して、
-      市営住宅の家賃を確認するためのシミュレーターです。
-    </p>
+  <p>
+    世帯の年間所得と家族構成を入力すると、
+    月額所得と収入基準を確認できます。
+  </p>
 
-    <label for="family">世帯人数</label>
-    <select id="family">
-      <option value="1">1人</option>
-      <option value="2">2人</option>
-      <option value="3">3人</option>
-      <option value="4">4人</option>
-      <option value="5">5人</option>
-      <option value="6">6人</option>
-    </select>
+  <label for="housing">住宅の種類</label>
+  <select id="housing">
+    <option value="public">公営住宅</option>
+    <option value="improved">改良住宅</option>
+  </select>
 
-    <label for="income">世帯の年間所得金額（円）</label>
-    <input
-      type="number"
-      id="income"
-      placeholder="例：2000000"
-      min="0"
-    >
+  <label for="level">世帯区分</label>
+  <select id="level">
+    <option value="general">一般世帯</option>
+    <option value="discretionary">裁量階層</option>
+  </select>
 
-    <p class="notice">
-      ※年間所得金額は、給与収入や年金収入そのものではなく、
-      所定の計算をした後の所得金額です。
-    </p>
+  <label for="family">世帯人数（申込者を含む）</label>
+  <select id="family">
+    <option value="1">1人</option>
+    <option value="2">2人</option>
+    <option value="3">3人</option>
+    <option value="4">4人</option>
+    <option value="5">5人</option>
+    <option value="6">6人</option>
+  </select>
 
-    <label for="housing">住宅の種類</label>
-    <select id="housing">
-      <option value="public">公営住宅</option>
-      <option value="improved">改良住宅</option>
-    </select>
+  <label for="income">
+    世帯全員の年間所得合計（円）
+  </label>
+  <input
+    type="number"
+    id="income"
+    min="0"
+    placeholder="例：2020000"
+  >
 
-    <button type="button" onclick="checkInput()">
-      入力内容を確認する
-    </button>
+  <p class="notice">
+    ※給与収入・年金収入そのものではありません。
+    給与所得控除などを差し引いた後の所得金額を入力してください。
+  </p>
 
-    <div id="result"></div>
-  </section>
+  <label for="earners">
+    給与所得・公的年金所得がある人数
+  </label>
+  <select id="earners">
+    <option value="0">0人</option>
+    <option value="1">1人</option>
+    <option value="2">2人</option>
+    <option value="3">3人</option>
+    <option value="4">4人</option>
+  </select>
 
-  <section class="card">
-    <h2>三原市営住宅について</h2>
-    <p>
-      三原市営住宅の家賃は、世帯の所得や住宅の
-      立地条件、広さ、建築後の経過年数などによって
-      決まります。
-    </p>
-    <p>
-      同じ世帯収入でも、入居する住宅によって
-      家賃が異なる場合があります。
-    </p>
-  </section>
+  <button onclick="calculate()">
+    月額所得を計算する
+  </button>
 
-  <section class="card official-link">
-    <h2>公式情報</h2>
-    <p>
-      <a href="https://www.shieijyutaku-mihara.jp/"
-         target="_blank" rel="noopener">
-        三原市営住宅管理グループ
-      </a>
-    </p>
-    <p>
-      <a href="https://www.shieijyutaku-mihara.jp/guide/criterion/"
-         target="_blank" rel="noopener">
-        収入基準について
-      </a>
-    </p>
-    <p>
-      <a href="https://www.shieijyutaku-mihara.jp/guide/method/"
-         target="_blank" rel="noopener">
-        月額所得の計算方法
-      </a>
-    </p>
-  </section>
+  <div id="result" class="result"></div>
+</section>
 
-  <section class="card">
-    <h2>ご利用上の注意</h2>
-    <p class="notice">
-      このサイトは家賃の目安を確認するための
-      試作サイトです。
-      実際の家賃や入居資格を保証するものではありません。
-      正確な金額については三原市営住宅管理グループへ
-      ご確認ください。
-    </p>
-  </section>
+<section class="card">
+  <h2>計算方法について</h2>
+
+  <p>
+    三原市の収入基準は、年間所得から各種控除を
+    差し引き、12か月で割って算出します。
+  </p>
+
+  <p>
+    同居控除：1人につき380,000円
+  </p>
+
+  <p>
+    給与・年金所得者の控除：1人につき100,000円
+  </p>
+
+  <p class="notice">
+    この試作版では、個別の特別控除、障害者控除、
+    ひとり親控除などはまだ計算していません。
+  </p>
+</section>
+
+<section class="card">
+  <h2>公式情報</h2>
+  <p>
+    <a href="https://www.city.mihara.hiroshima.jp/soshiki/54/shuunyuukijun.html"
+       target="_blank" rel="noopener">
+      三原市：市営住宅収入基準について
+    </a>
+  </p>
+  <p>
+    <a href="https://www.city.mihara.hiroshima.jp/soshiki/54/juutakudantiitiran.html"
+       target="_blank" rel="noopener">
+      三原市：市営住宅団地一覧
+    </a>
+  </p>
+</section>
+
+<section class="card">
+  <h2>ご利用上の注意</h2>
+  <p class="notice">
+    このサイトは収入基準の目安を確認するための
+    試作シミュレーターです。
+    実際の入居資格や家賃を保証するものではありません。
+    正確な判定は三原市の公式窓口にご確認ください。
+  </p>
+</section>
 
 </main>
 
 <footer>
-  <p>© 三原市営住宅 家賃かんたん計算</p>
-  <p>非公式の情報提供サイトです。</p>
+  © 三原市営住宅 家賃かんたん計算
+  <p>三原市公式サイトとは関係のない非公式サイトです。</p>
 </footer>
 
 <script>
-  function checkInput() {
-    const family = document.getElementById("family").value;
-    const income = document.getElementById("income").value;
-    const housing = document.getElementById("housing").value;
-    const result = document.getElementById("result");
+function calculate() {
 
-    if (income === "" || Number(income) < 0) {
-      alert("年間所得金額を入力してください。");
-      return;
-    }
+  const housing = document.getElementById("housing").value;
+  const level = document.getElementById("level").value;
 
-    const housingName =
-      housing === "public" ? "公営住宅" : "改良住宅";
+  const family = Number(document.getElementById("family").value);
+  const income = Number(document.getElementById("income").value);
+  const earners = Number(document.getElementById("earners").value);
 
-    result.style.display = "block";
-
-    result.innerHTML = `
-      <h3>入力内容の確認</h3>
-      <p>世帯人数：${family}人</p>
-      <p>年間所得金額：${Number(income).toLocaleString()}円</p>
-      <p>住宅の種類：${housingName}</p>
-      <hr>
-      <p>
-        現在、正式な家賃計算機能を準備しています。
-        次の開発段階で、三原市の公式計算方法に
-        対応させます。
-      </p>
-    `;
-
-    result.scrollIntoView({ behavior: "smooth" });
+  if (
+    document.getElementById("income").value === "" ||
+    !Number.isFinite(income) ||
+    income < 0
+  ) {
+    alert("年間所得合計を正しく入力してください。");
+    return;
   }
+
+  // 同居控除
+  const familyDeduction = (family - 1) * 380000;
+
+  // 給与・年金所得者の控除
+  const earnerDeduction = earners * 100000;
+
+  // 今回の試作版で計算する控除合計
+  const deduction = familyDeduction + earnerDeduction;
+
+  // 月額所得
+  const monthlyIncome = Math.max(
+    0,
+    income - deduction
+  ) / 12;
+
+  // 三原市公式の収入基準
+  let limit;
+
+  if (housing === "public") {
+    limit = level === "general" ? 158000 : 214000;
+  } else {
+    limit = level === "general" ? 114000 : 139000;
+  }
+
+  const eligible = monthlyIncome <= limit;
+
+  const result = document.getElementById("result");
+
+  result.style.display = "block";
+
+  result.innerHTML = `
+    <h2>計算結果</h2>
+
+    <p>年間所得合計</p>
+    <p>${income.toLocaleString()}円</p>
+
+    <p>同居控除</p>
+    <p>-${familyDeduction.toLocaleString()}円</p>
+
+    <p>給与・年金所得者控除</p>
+    <p>-${earnerDeduction.toLocaleString()}円</p>
+
+    <hr>
+
+    <p>推定月額所得</p>
+    <div class="result-number">
+      ${Math.round(monthlyIncome).toLocaleString()}円
+    </div>
+
+    <p>収入基準：${limit.toLocaleString()}円以下</p>
+
+    <hr>
+
+    <h3>
+      ${eligible
+        ? "収入基準を満たす可能性があります"
+        : "収入基準を超えています"}
+    </h3>
+
+    <p class="notice">
+      ※個別の特別控除等を含まない試算です。
+      実際の判定とは異なる場合があります。
+    </p>
+  `;
+
+  result.scrollIntoView({ behavior: "smooth" });
+}
 </script>
 
 </body>
